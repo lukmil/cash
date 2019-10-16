@@ -1,0 +1,6 @@
+# ide
+/.idea
+*.iml
+
+# dependencies
+/node_modules
