@@ -2,13 +2,13 @@
   "name": "cash",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "directories": {
-    "test": "tests"
+    "test": "test"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --exec babel-node app/app.js",
+    "test": "./node_modules/.bin/mocha --recursive --require @babel/register"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,8 @@
     "@babel/core": "^7.6.4",
     "@babel/node": "^7.6.3",
     "@babel/preset-env": "^7.6.3",
-    "nodemon": "^1.19.4"
+    "@babel/register": "^7.6.2",
+    "nodemon": "^1.19.4",
+    "mocha": "^6.2.1"
   }
 }
