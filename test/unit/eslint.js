@@ -1,6 +1,6 @@
 import glob from 'glob';
 import { CLIEngine } from 'eslint';
-import { assert } from 'assert';
+import assert from 'assert';
 import { describe, it } from 'mocha';
 
 const paths = glob.sync('./+(app|test)/**/*.js');
@@ -22,7 +22,7 @@ function generateTest(result) {
 
   it(`validates ${filePath}`, () => {
     if (messages.length > 0) {
-      assert.fail(false, true, formatMessages(messages));
+      assert.ok(false, formatMessages(messages));
     }
   });
 }
