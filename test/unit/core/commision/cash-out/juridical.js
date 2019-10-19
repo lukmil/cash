@@ -15,12 +15,12 @@ const createTransfer = (amount) => ({
 
 describe('Cash out juridical commission', () => {
   it('commission is less than min amount', () => {
-    const result = countJuridicalCommission(createTransfer(10));
-    assert.strictEqual(result, 0.5);
+    const actual = countJuridicalCommission(createTransfer(10));
+    assert.strictEqual(actual, 0.5);
   });
 
   it('commission is greater than min amount', () => {
-    const result = countJuridicalCommission(createTransfer(1000));
-    assert.strictEqual(result, 3);
+    const actual = countJuridicalCommission(createTransfer(1000));
+    assert.strictEqual(actual, 3);
   });
 });
