@@ -13,7 +13,7 @@ const createTransfer = (amount) => ({
   },
 });
 
-describe('Cash in commission count', () => {
+describe('Cash in commissions', () => {
   it('commission is less than max amount', () => {
     const result = countCashInCommission(createTransfer(200));
     assert.strictEqual(result, 0.06);
