@@ -2,7 +2,7 @@ import { describe, it } from 'mocha';
 import assert from 'assert';
 import countCashInCommission from '../../../../app/core/commission/cash-in';
 
-const createTransfer = (amount) => ({
+const createTransaction = (amount) => ({
   date: '2016-01-05',
   user_id: 1,
   user_type: 'natural',
@@ -15,12 +15,12 @@ const createTransfer = (amount) => ({
 
 describe('Cash in commissions', () => {
   it('commission is less than max amount', () => {
-    const result = countCashInCommission(createTransfer(200));
+    const result = countCashInCommission(createTransaction(200));
     assert.strictEqual(result, 0.06);
   });
 
   it('commission is greater than max amount', () => {
-    const result = countCashInCommission(createTransfer(1000000));
+    const result = countCashInCommission(createTransaction(1000000));
     assert.strictEqual(result, 5);
   });
 });
