@@ -11,7 +11,7 @@ const rule = {
 
 const isSumOverWeekLimit = (sum, limit) => sum >= limit;
 
-export default function countNaturalCommission(transaction, transactions) {
+function count(transaction, transactions) {
   const { date, operation: { amount: operationAmount } } = transaction;
   const { percents, week_limit: { amount: weekLimitAmount } } = rule;
 
@@ -28,3 +28,5 @@ export default function countNaturalCommission(transaction, transactions) {
 
   return 0;
 }
+
+module.exports = { count };

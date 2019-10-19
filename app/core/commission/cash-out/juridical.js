@@ -8,9 +8,11 @@ const rule = {
   },
 };
 
-export default function countJuridicalCommission({ operation: { amount: operationAmount } }) {
+function count({ operation: { amount: operationAmount } }) {
   const { percents, min: { amount: minAmount } } = rule;
   const commissions = countPercentage(operationAmount, percents);
 
   return commissions < minAmount ? minAmount : commissions;
 }
+
+module.exports = { count };

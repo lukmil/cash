@@ -8,9 +8,11 @@ const rule = {
   },
 };
 
-export default function countCashInCommission({ operation: { amount: operationAmount } }) {
+export default function count({ operation: { amount: operationAmount } }) {
   const { percents, max: { amount: maxAmount } } = rule;
   const commissions = countPercentage(operationAmount, percents);
 
   return commissions > maxAmount ? maxAmount : commissions;
 }
+
+module.exports = { count };
