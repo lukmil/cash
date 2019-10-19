@@ -1,10 +1,10 @@
 import { describe, it } from 'mocha';
 import assert from 'assert';
-import percentageCounter from '../../../app/utils/percentage-counter';
+import countPercentage from '../../../app/utils/percentage-counter';
 
 describe('Percentage counter', () => {
   function assertThrowsError(sum, percents) {
-    const block = () => percentageCounter(sum, percents);
+    const block = () => countPercentage(sum, percents);
     assert.throws(block, Error('Invalid sum or percents'));
   }
 
@@ -25,7 +25,7 @@ describe('Percentage counter', () => {
   });
 
   it('count percentage', () => {
-    const actual = percentageCounter(200, 20);
+    const actual = countPercentage(200, 20);
     assert.strictEqual(actual, 40);
   });
 });
