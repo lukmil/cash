@@ -27,6 +27,7 @@
     "nodemon": "^1.19.4"
   },
   "dependencies": {
+    "glob": "^7.1.4",
     "moment": "^2.24.0",
     "sinon": "^7.5.0"
   }
