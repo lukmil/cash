@@ -21,7 +21,7 @@ function get(transaction, transactions) {
 
   // in this case formatted number is for printing, maybe it is better to ceil when
   // counting, but at this point there is only one place to use it and do not need
-  // to worry about adding more functionality
+  // to worry about adding more functionality when extending commission with additional rules
   return numberFormatter.ceilWith2DecimalPlaces(commission);
 }
 
