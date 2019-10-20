@@ -5,7 +5,7 @@
     2: npm start filePath (takes one argument) => npm start input.json
     
 ### Steps to run tests:
-    1: npm install (if you have not done yet)
+    1: npm install (if you have not done this step yet)
     2: npm test
 
 ### Why I chosen libs which I used: 
