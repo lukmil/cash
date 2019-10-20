@@ -16,15 +16,14 @@ const createTransaction = (userType) => ({
 
 describe('Cash out commissions', () => {
   it('user type natural should filter transactions before count', () => {
-    const transactions = [createTransaction(naturalUser), createTransaction(juridical)];
+    const transactions = [createTransaction(naturalUser), createTransaction(juridicalUser)];
     const expectedTransactions = [transactions[0]];
     const spy = sinon.spy(natural, 'count');
-    const transaction = createTransaction(naturalUser);
 
-    cashOut.count(transaction, transactions);
+    cashOut.count(transactions[0], transactions);
 
     assert.ok(spy.calledOnce);
-    assert.ok(spy.calledWith(transaction, expectedTransactions));
+    assert.ok(spy.calledWith(transactions[0], expectedTransactions));
   });
 
   it('transaction user type juridical', () => {
