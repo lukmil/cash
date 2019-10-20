@@ -1,9 +1,12 @@
-import { describe, it } from 'mocha';
+import {
+  describe, it, beforeEach, afterEach,
+} from 'mocha';
 import assert from 'assert';
 import sinon from 'sinon';
 import cashOut from '../../../app/core/commission/cash-out';
 import cashIn from '../../../app/core/commission/cash-in';
 import commission from '../../../app/core/commission';
+import numberFormatter from '../../../app/utils/number-formatter';
 
 const cashInType = 'cash_in';
 const cashOutType = 'cash_out';
@@ -14,26 +17,35 @@ const createTransaction = (type) => ({
 });
 
 describe('Commission', () => {
-  it('transaction type cash in', () => {
-    const spy = sinon.spy(cashIn, 'count');
-    commission.count(createTransaction(cashInType), []);
+  let numberFormatterSpy;
+  beforeEach(() => {
+    numberFormatterSpy = sinon.spy(numberFormatter, 'ceilWith2DecimalPlaces');
+  });
+  afterEach(() => {
+    numberFormatterSpy.restore();
+  });
 
-    assert.ok(spy.calledOnce);
+  it('transaction type cash in', () => {
+    const cashInSpy = sinon.spy(cashIn, 'count');
+    commission.get(createTransaction(cashInType), []);
+
+    assert.ok(cashInSpy.calledOnce);
+    assert.ok(numberFormatterSpy.calledOnce);
   });
 
   it('transaction type cash out should filter transactions before count', () => {
     const transactions = [createTransaction(cashInType), createTransaction(cashOutType)];
     const expectedTransactions = [transactions[1]];
-    const spy = sinon.spy(cashOut, 'count');
+    const cashOutSpy = sinon.spy(cashOut, 'count');
 
-    commission.count(transactions[1], transactions);
+    commission.get(transactions[1], transactions);
 
-    assert.ok(spy.calledOnce);
-    assert.ok(spy.calledWith(transactions[1], expectedTransactions));
+    assert.ok(cashOutSpy.calledWith(transactions[1], expectedTransactions));
+    assert.ok(numberFormatterSpy.calledOnce);
   });
 
   it('transaction type unknown', () => {
-    const block = () => commission.count(createTransaction('unknown'));
+    const block = () => commission.get(createTransaction('unknown'));
     assert.throws(block, Error('unknown transaction type'));
   });
 });
