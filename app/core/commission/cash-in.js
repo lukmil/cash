@@ -1,4 +1,4 @@
-import countPercentage from '../../utils/percentage-counter';
+import percentageCounter from '../../utils/percentage-counter';
 
 const rule = {
   percents: 0.03,
@@ -10,7 +10,7 @@ const rule = {
 
 export default function count({ operation: { amount: operationAmount } }) {
   const { percents, max: { amount: maxAmount } } = rule;
-  const commissions = countPercentage(operationAmount, percents);
+  const commissions = percentageCounter.count(operationAmount, percents);
 
   return commissions > maxAmount ? maxAmount : commissions;
 }

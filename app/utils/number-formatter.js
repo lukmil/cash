@@ -12,7 +12,9 @@ function ceilDecimalAdjust(type, number, exponent) {
   return +(`${value[0]}e${value[1] ? (+value[1] + exp) : exp}`);
 }
 
-export default function ceilWith2DecimalPlaces(number) {
+function ceilWith2DecimalPlaces(number) {
   if (number == null) throw new Error('Number is not given');
   return ceilDecimalAdjust('ceil', number, -2).toFixed(2);
 }
+
+module.exports = { ceilWith2DecimalPlaces };

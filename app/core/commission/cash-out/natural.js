@@ -1,5 +1,5 @@
-import countFromStartOfWeekTillTransaction from '../../../utils/transactions-amount-counter';
-import countPercentage from '../../../utils/percentage-counter';
+import transactionsAmountCounter from '../../../utils/transactions-amount-counter';
+import percentageCounter from '../../../utils/percentage-counter';
 
 const rule = {
   percents: 0.3,
@@ -15,15 +15,15 @@ function count(transaction, transactions) {
   const { date, operation: { amount: operationAmount } } = transaction;
   const { percents, week_limit: { amount: weekLimitAmount } } = rule;
 
-  const weekTotalAmount = countFromStartOfWeekTillTransaction(date, transactions);
+  const weekTotalAmount = transactionsAmountCounter.sinceStartOfWeek(date, transactions);
   const totalSum = weekTotalAmount + operationAmount;
 
   if (isSumOverWeekLimit(weekTotalAmount, weekLimitAmount)) {
-    return countPercentage(operationAmount, percents);
+    return percentageCounter.count(operationAmount, percents);
   }
 
   if (isSumOverWeekLimit(totalSum, weekLimitAmount)) {
-    return countPercentage(totalSum - 1000, percents);
+    return percentageCounter.count(totalSum - 1000, percents);
   }
 
   return 0;

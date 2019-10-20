@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export default function countTotalAmountSinceStartOfWeek(endDate, transactions) {
+function sinceStartOfWeek(endDate, transactions) {
   if (!endDate) throw new Error('end date is not given');
   if (Number.isNaN(Date.parse(endDate))) throw new Error('end date is not valid');
   if (!transactions || !transactions.length) return 0;
@@ -11,3 +11,5 @@ export default function countTotalAmountSinceStartOfWeek(endDate, transactions) 
     .filter(({ date }) => moment(date).isBetween(startOfWeekDay, endDate, null, '[]')) // monday 00:00:00.000 is in week range
     .reduce((acc, { operation: { amount } }) => acc + amount, 0);
 }
+
+module.exports = { sinceStartOfWeek };
