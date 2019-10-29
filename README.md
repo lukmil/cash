@@ -4,6 +4,7 @@
 
 ### Breaking tests: 
     I got notes that some of the tests were breaking. I tried to break my test with:
+        * Travis build and passes all tests
         * Different pc (3), with Ubuntu and w10, but still nothing works
         * Just in case in packages.json I removed ^ for the same versions as mine
         * Tried with Nodejs 12.13.0 LTS and 13.0.1 (latest)
