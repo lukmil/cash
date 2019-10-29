@@ -4,6 +4,7 @@ import sinon from 'sinon';
 import cashOut from '../../../../app/core/commission/cash-out';
 import natural from '../../../../app/core/commission/cash-out/natural';
 import juridical from '../../../../app/core/commission/cash-out/juridical';
+import config from '../../../fixtures/config-example';
 
 const naturalUser = 'natural';
 const juridicalUser = 'juridical';
@@ -20,17 +21,19 @@ describe('Cash out commissions', () => {
     const expectedTransactions = [transactions[0]];
     const spy = sinon.spy(natural, 'count');
 
-    cashOut.count(transactions[0], transactions);
+    cashOut.count(transactions[0], transactions, config.cashOut);
 
     assert.ok(spy.calledOnce);
-    assert.ok(spy.calledWith(transactions[0], expectedTransactions));
+    assert.ok(spy.calledWith(transactions[0], expectedTransactions), config.cashOut.natural);
   });
 
   it('transaction user type juridical', () => {
     const spy = sinon.spy(juridical, 'count');
-    cashOut.count(createTransaction(juridicalUser), []);
+    const transaction = createTransaction(juridicalUser);
+    cashOut.count(transaction, [], config.cashOut);
 
     assert.ok(spy.calledOnce);
+    assert.ok(spy.calledWith(transaction, config.cashOut.juridical));
   });
 
   it('transaction user type unknown', () => {

@@ -7,6 +7,7 @@ import cashOut from '../../../app/core/commission/cash-out';
 import cashIn from '../../../app/core/commission/cash-in';
 import commission from '../../../app/core/commission';
 import numberFormatter from '../../../app/utils/number-formatter';
+import config from '../../fixtures/config-example';
 
 const cashInType = 'cash_in';
 const cashOutType = 'cash_out';
@@ -27,9 +28,11 @@ describe('Commission', () => {
 
   it('transaction type cash in', () => {
     const cashInSpy = sinon.spy(cashIn, 'count');
-    commission.get(createTransaction(cashInType), []);
+    const transaction = createTransaction(cashInType);
+    commission.get(transaction, [], config);
 
     assert.ok(cashInSpy.calledOnce);
+    assert.ok(cashInSpy.calledWith(transaction, config.cashIn));
     assert.ok(numberFormatterSpy.calledOnce);
   });
 
@@ -38,9 +41,9 @@ describe('Commission', () => {
     const expectedTransactions = [transactions[1]];
     const cashOutSpy = sinon.spy(cashOut, 'count');
 
-    commission.get(transactions[1], transactions);
+    commission.get(transactions[1], transactions, config);
 
-    assert.ok(cashOutSpy.calledWith(transactions[1], expectedTransactions));
+    assert.ok(cashOutSpy.calledWith(transactions[1], expectedTransactions, config.cashOut));
     assert.ok(numberFormatterSpy.calledOnce);
   });
 

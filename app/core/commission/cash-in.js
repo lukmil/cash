@@ -1,15 +1,8 @@
 import percentageCounter from '../../utils/percentage-counter';
 
-const rule = {
-  percents: 0.03,
-  max: {
-    amount: 5,
-    currency: 'EUR',
-  },
-};
-
-export default function count({ operation: { amount: operationAmount } }) {
-  const { percents, max: { amount: maxAmount } } = rule;
+function count(transaction, config) {
+  const { operation: { amount: operationAmount } } = transaction;
+  const { percents, max: { amount: maxAmount } } = config;
   const commissions = percentageCounter.count(operationAmount, percents);
 
   return commissions > maxAmount ? maxAmount : commissions;

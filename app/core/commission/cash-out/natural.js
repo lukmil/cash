@@ -1,29 +1,21 @@
 import transactionsAmountCounter from '../../../utils/transactions-amount-counter';
 import percentageCounter from '../../../utils/percentage-counter';
 
-const rule = {
-  percents: 0.3,
-  week_limit: {
-    amount: 1000,
-    currency: 'EUR',
-  },
-};
+const isSumOverLimit = (sum, limit) => sum >= limit;
 
-const isSumOverWeekLimit = (sum, limit) => sum >= limit;
-
-function count(transaction, transactions) {
+function count(transaction, transactions, config) {
   const { date, operation: { amount: operationAmount } } = transaction;
-  const { percents, week_limit: { amount: weekLimitAmount } } = rule;
+  const { percents, week_limit: { amount: weekLimitAmount } } = config;
 
   const weekTotalAmount = transactionsAmountCounter.sinceStartOfWeek(date, transactions);
   const totalSum = weekTotalAmount + operationAmount;
 
-  if (isSumOverWeekLimit(weekTotalAmount, weekLimitAmount)) {
+  if (isSumOverLimit(weekTotalAmount, weekLimitAmount)) {
     return percentageCounter.count(operationAmount, percents);
   }
 
-  if (isSumOverWeekLimit(totalSum, weekLimitAmount)) {
-    return percentageCounter.count(totalSum - 1000, percents);
+  if (isSumOverLimit(totalSum, weekLimitAmount)) {
+    return percentageCounter.count(totalSum - weekLimitAmount, percents);
   }
 
   return 0;
