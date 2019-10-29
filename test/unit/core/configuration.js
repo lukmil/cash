@@ -32,5 +32,6 @@ describe('Configuration', () => {
     }
 
     configuration.onLoad(callback).done();
+    assert.ok(configRequestStub.calledThrice);
   });
 });
