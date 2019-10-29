@@ -1,5 +1,7 @@
 # cash
 
+[![Build Status](https://travis-ci.org/lukmil/cash.svg?branch=master)](https://travis-ci.org/lukmil/cash)
+
 ### Breaking tests: 
     I got notes that some of the tests were breaking. I tried to break my test with:
         * Different pc (3), with Ubuntu and w10, but still nothing works
