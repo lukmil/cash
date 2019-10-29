@@ -6,7 +6,7 @@ function makeRequest(hostname, path) {
   return fetch(`${hostname}${path}`);
 }
 
-function GET(configType) {
+function get(configType) {
   return makeRequest(configHostname, configType)
     .then((response) => response.json())
     .catch(() => {
@@ -14,4 +14,4 @@ function GET(configType) {
     });
 }
 
-module.exports = { GET };
+module.exports = { get };
