@@ -1,15 +1,15 @@
 # cash
 
 ### Breaking tests: 
-I got notes that some of the tests were breaking. I tried to break my test with:
- * Different pc (3), with Ubuntu and w10, but still nothing works
- * Just in case in packages.json I removed ^ for the same versions as mine
- * Tried with Nodejs 12.13.0 LTS and 13.0.1 (latest)
- * Tried with npm version 6.9.0 and 6.12.0
- * Tried looking for "expected.test" and I found it in two places
-   ** regjsgen and eslint, but it does not even call them
+    I got notes that some of the tests were breaking. I tried to break my test with:
+        * Different pc (3), with Ubuntu and w10, but still nothing works
+        * Just in case in packages.json I removed ^ for the same versions as mine
+        * Tried with Nodejs 12.13.0 LTS and 13.0.1 (latest)
+        * Tried with npm version 6.9.0 and 6.12.0
+        * Tried looking for "expected.test" and I found it in two places
+             ** regjsgen and eslint, but it does not even call them
     
-And still nothing helps, I hope it will not happen again or if it will I need more information about which tests are breaking.
+    And still nothing helps, I hope it will not happen again or if it will I need more information about which tests are breaking.
 
 ### Steps to run application:
     1: npm install
