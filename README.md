@@ -16,3 +16,6 @@
     * sinon - for test spies
     * moment - for better experience with dates (startOf and isBetween methods)
     * glob - for eslint tests to match files
+    * node fetch - looked like a easiest http library
+    * promise - to deal with promises
+    
